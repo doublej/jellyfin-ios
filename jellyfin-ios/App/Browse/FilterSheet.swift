@@ -27,7 +27,9 @@ struct FilterSheet: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(L10n.t("filters_clear")) { model.prefs.clearFilters() }.disabled(model.prefs.activeFilterCount == 0)
                 }
-                ToolbarItem(placement: .confirmationAction) { Button(L10n.t("filters_done")) { dismiss() } }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(L10n.t("filters_done")) { dismiss() }.accessibilityIdentifier("filters.done")
+                }
             }
             .task { await model.loadFilters() }
         }

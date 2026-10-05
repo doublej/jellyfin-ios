@@ -23,13 +23,13 @@ AVPlayer can't open Matroska (`-11828 Cannot Open`, measured for every MKV sampl
 only applies to the one MP4 in the library (Asteroid City). Everything else is served as HLS, usually a remux
 (video and audio copied, "Remux" badge in the player). In the simulator, an HLS remux starts in 1.1–1.4 s.
 
-## Direct play of the one MP4 stalls in the simulator (unconfirmed cause)
-AVPlayer never gets past "evaluating buffering rate" for `/Videos/{id}/stream.mp4?static=true`. The server side
-looks healthy: range requests return 206 in 0.09 s, the `moov` atom is at the front, and the first 12 MB of the
-file play locally in AVPlayer in 1.8 s. I couldn't isolate it on macOS because LuLu blocks freshly built
-command-line binaries from the LAN (even `/System/Info/Public` fails from them).
-The player now treats a direct stream that isn't ready after 6 s as failed and falls back to HLS with a notice,
-so this film starts in about 7 s in the simulator. It still needs a test on a real iPhone.
+## Direct play of the one MP4 stalled once (unconfirmed cause)
+During the probe run, AVPlayer never got past "evaluating buffering rate" for `/Videos/{id}/stream.mp4?static=true`.
+Later, in the app, the same film started in 1.80 s (`PlayerTimings.testFilmStarts`). The server side looked
+healthy throughout: range requests return 206 in 0.09 s, the `moov` atom is at the front, and the first 12 MB
+play locally in 1.8 s. My guess is the server being busy (probe conversions, the trickplay task), but it isn't
+confirmed. I couldn't isolate it on macOS because LuLu blocks freshly built command-line binaries from the LAN.
+As a safety net, a direct stream that isn't ready after 6 s now counts as failed and falls back to HLS with a notice.
 
 ## The server can't encode H.264 from 10-bit HEVC
 FFmpeg's `h264_videotoolbox` fails with `cannot create compression session: -12903` on 10-bit HEVC input. Software
@@ -46,9 +46,16 @@ To fix it, turn on software fallback or HEVC encoding in the server's playback s
 decode it: the probe got no frame in 10 s. The `hvcC` box already has the parameter sets, so after a download
 finishes the app renames the sample entry to `hvc1` (`MP4.retagHEVC`). The same file then plays.
 
-## HDR10+ and Dolby Vision don't play in the simulator (device unconfirmed)
-HLS remuxes of the HDR10+ and Dolby Vision samples fail with CoreMedia `-12927` in the simulator; SDR HEVC plays.
-The profile still offers HDR, because iPhones decode it in hardware. Not tested on a device yet.
+## HDR10+ and Dolby Vision don't play over the server's HLS in the simulator (device unconfirmed)
+HLS remuxes of the HDR10+ and Dolby Vision samples fail with CoreMedia `-12927`, but the same files remuxed to MP4
+and played from disk work (download probe). So the simulator can decode them, and the fault is in the HLS stream
+the server makes for HDR. I haven't found out what it is. The profile still offers HDR. Downloads of these films play.
+Not tested on a device yet.
+
+## Starting partway into a conversion can take long the first time
+Croupier (FLAC audio, converted for HLS) took 39.8 s to start at 10:00 the first time ("No response for media
+file in 3.17 s" from AVPlayer while the server spun up). The three switches after it restarted in 2.2–3.6 s.
+The iPad screen tour was playing at the same time, so the server was busy.
 
 ## Embedded text subtitles are slow the first time
 The server extracts an embedded subtitle track from the whole MKV before `Stream.js` answers. One sample took

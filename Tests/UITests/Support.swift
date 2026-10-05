@@ -69,8 +69,17 @@ enum UI {
         let inBar = app.tabBars.buttons[title]
         if inBar.exists { return inBar.tap() }
         let button = app.buttons.matching(NSPredicate(format: "label == %@", title)).firstMatch
-        XCTAssertTrue(button.waitForExistence(timeout: 10), "tab \(title) among \(app.buttons.allElementsBoundByIndex.map(\.label))")
-        button.tap()
+        if button.waitForExistence(timeout: 2) { return button.tap() }
+        // iPad: a library sits in the "Libraries" group, which only the sidebar lists (as cells, not buttons).
+        let sidebar = app.buttons["Toggle sidebar"].firstMatch
+        XCTAssertTrue(sidebar.exists, "tab \(title) among \(app.buttons.allElementsBoundByIndex.map(\.label))")
+        guard sidebar.exists else { return }
+        sidebar.tap()
+        let row = app.cells.matching(NSPredicate(format: "label == %@", title)).firstMatch
+        let item = row.waitForExistence(timeout: 5) ? row : app.staticTexts[title].firstMatch
+        XCTAssertTrue(item.waitForExistence(timeout: 5), "tab \(title)")
+        item.tap()
+        if app.buttons["Hide Sidebar"].exists { app.buttons["Hide Sidebar"].tap() }
     }
 
     /// Waits until `element`'s label is `label`.

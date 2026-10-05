@@ -9,6 +9,8 @@ set -uo pipefail
 [[ -z "${ADMIN_USERNAME:-}" ]] && exec onenv export jellyfin -- "$0" "$@"
 
 here=$(cd "$(dirname "$0")" && pwd)
+# Simulators run visibly: Xcode 27's simulator UI is DeviceHub (no Simulator.app any more).
+open -g "$(xcode-select -p)/../Applications/DeviceHub.app" 2>/dev/null
 log="${XCTEST_LOG:-/tmp/jfios-xctest.log}"
 codefile=/tmp/jfios-qc-code
 trash "$codefile" 2>/dev/null

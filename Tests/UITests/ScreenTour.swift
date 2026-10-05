@@ -15,16 +15,24 @@ final class ScreenTour: XCTestCase {
         film(app)
         library(app)
         series(app)
+        search(app)
+        UI.tab(app, "Downloads")
+        UI.shot("61-downloads", self)
+        settings(app)
+    }
+
+    /// Types a query, then closes the search so the tab bar comes back.
+    @MainActor
+    private func search(_ app: XCUIApplication) {
         UI.tab(app, "Search")
         let field = app.searchFields.firstMatch
-        XCTAssertTrue(field.waitForExistence(timeout: 10))
+        guard field.waitForExistence(timeout: 10) else { return UI.shot("60-search-no-field", self) }
         field.tap()
         field.typeText("the")
         sleep(3)
         UI.shot("60-search", self)
-        UI.tab(app, "Downloads")
-        UI.shot("61-downloads", self)
-        settings(app)
+        if app.buttons["Cancel"].exists { app.buttons["Cancel"].tap() }
+        if app.buttons["Close"].exists { app.buttons["Close"].firstMatch.tap() }
     }
 
     @MainActor
@@ -51,6 +59,7 @@ final class ScreenTour: XCTestCase {
         app.buttons["detail.play"].tap()
         XCTAssertTrue(app.buttons["player.toggle"].waitForExistence(timeout: 40))
         _ = UI.waitForLabel(app.buttons["player.toggle"], "Pause", timeout: 40)
+        sleep(3)
         if !app.buttons["player.close"].isHittable { app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.3)).tap() }
         UI.shot("35-player", self)
         for menu in ["player.tracks", "player.quality"] where app.buttons[menu].isHittable {
@@ -66,21 +75,38 @@ final class ScreenTour: XCTestCase {
     @MainActor
     private func library(_ app: XCUIApplication) {
         UI.tab(app, "Films")
-        XCTAssertTrue(app.buttons["browse.layout"].waitForExistence(timeout: 20))
+        XCTAssertTrue(app.buttons["browse.sort"].waitForExistence(timeout: 20))
         sleep(2)
         UI.shot("40-library-grid", self)
-        app.buttons["browse.layout"].tap()
-        sleep(2)
-        UI.shot("41-library-list", self)
-        app.buttons["browse.layout"].tap()
         app.buttons["browse.sort"].tap()
         sleep(1)
         UI.shot("42-library-sort", self)
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.9)).tap()
-        app.buttons["browse.filters"].tap()
-        sleep(2)
-        UI.shot("43-library-filters", self)
-        app.buttons["Done"].tap()
+        if let layout = toolbar(app, "browse.layout", labels: ["List", "Posters"]) {
+            layout.tap()
+            sleep(2)
+            UI.shot("41-library-list", self)
+            toolbar(app, "browse.layout", labels: ["List", "Posters"])?.tap()
+        }
+        if let filters = toolbar(app, "browse.filters", labels: ["Filters"]) {
+            filters.tap()
+            sleep(2)
+            UI.shot("43-library-filters", self)
+            app.buttons["filters.done"].tap()
+        }
+    }
+
+    /// On iPad the system folds some toolbar buttons into its "More" overflow menu, where they keep
+    /// their labels but lose their identifiers. Nil when the menu doesn't offer it.
+    @MainActor
+    private func toolbar(_ app: XCUIApplication, _ id: String, labels: [String]) -> XCUIElement? {
+        let button = app.buttons[id]
+        if button.waitForExistence(timeout: 2) { return button }
+        app.buttons["More"].firstMatch.tap()
+        let item = app.descendants(matching: .any).matching(NSPredicate(format: "label IN %@", labels)).firstMatch
+        if item.waitForExistence(timeout: 5) { return item }
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.9)).tap()
+        return nil
     }
 
     @MainActor
@@ -94,9 +120,9 @@ final class ScreenTour: XCTestCase {
         UI.shot("50-series", self)
         app.swipeUp()
         UI.shot("51-series-episodes", self)
-        let episode = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH 'episode.'")).firstMatch
+        let episode = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'episode.'")).firstMatch
         guard episode.waitForExistence(timeout: 10) else { return XCTFail("episode list") }
-        episode.coordinate(withNormalizedOffset: CGVector(dx: 0.8, dy: 0.3)).tap()
+        episode.tap()
         sleep(3)
         UI.shot("52-episode", self)
         let season = app.buttons["episode.season"]

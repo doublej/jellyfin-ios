@@ -22,11 +22,12 @@ struct EpisodeList: View {
                     Text(Format.duration(episode.runTimeTicks)).font(Theme.caption).foregroundStyle(Theme.text3)
                     Text(episode.overview ?? "").font(Theme.meta).foregroundStyle(Theme.text2).lineLimit(3)
                 }
+                .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .accessibilityIdentifier("episode.\(episode.id)")
         }
         .contextMenu { CardMenu(item: episode) }
-        .accessibilityIdentifier("episode.\(episode.id)")
     }
 
     private func thumb(_ episode: Item, _ current: Item) -> some View {

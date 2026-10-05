@@ -37,12 +37,12 @@ final class DownloadTests: XCTestCase {
         XCTAssertTrue(field.waitForExistence(timeout: 10))
         field.tap()
         field.typeText("Everwood")
-        let series = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'card.'")).firstMatch
+        let series = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'card.' AND label CONTAINS 'Everwood'")).firstMatch
         XCTAssertTrue(series.waitForExistence(timeout: 20))
         series.tap()
-        let episode = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH 'episode.'")).firstMatch
+        let episode = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'episode.'")).firstMatch
         XCTAssertTrue(episode.waitForExistence(timeout: 30))
-        episode.coordinate(withNormalizedOffset: CGVector(dx: 0.8, dy: 0.3)).tap()
+        episode.tap()
         XCTAssertTrue(app.buttons["detail.download"].waitForExistence(timeout: 30))
     }
 }

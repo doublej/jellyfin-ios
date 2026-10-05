@@ -133,6 +133,11 @@ app-test: project
 probe: project
     scripts/xctest.sh test -scheme Probe -destination '{{ sim }}' -derivedDataPath .build/xcode
 
+# Warm launch to Home content on the booted simulator (the app must be installed and signed in)
+[group('quality')]
+launch-timing:
+    scripts/launch-timing.sh
+
 # Install a release build on the paired iPhone
 [group('build')]
 device-install: project

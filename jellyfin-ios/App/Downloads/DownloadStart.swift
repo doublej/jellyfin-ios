@@ -7,6 +7,14 @@ extension DownloadManager {
     /// video and audio remuxed into MP4 by the server.
     static let qualities = [0, 20_000_000, 8_000_000, 4_000_000, 1_500_000]
 
+    /// HEVC is kept as it is: the server can't encode H.264 from 10-bit HEVC (docs/GAPS.md), so those
+    /// files only come in their original quality.
+    static func qualities(_ item: Item) -> [Int] {
+        keepsHEVC(item.mediaSources?.first) ? [0] : qualities
+    }
+
+    static func keepsHEVC(_ source: MediaSource?) -> Bool { source?.video?.codec == "hevc" }
+
     func start(_ item: Item, bitrate: Int) {
         guard let client = app?.client else { return }
         Task {
@@ -30,7 +38,7 @@ extension DownloadManager {
         let audio = source.audioTracks.first { $0.isDefault == true } ?? source.audioTracks.first
         return client.url("/Videos/\(item.id)/stream.mp4", [
             ("mediaSourceId", source.id), ("static", "false"), ("container", "mp4"),
-            ("videoCodec", "h264"), ("audioCodec", "aac"), ("audioChannels", "2"),
+            ("videoCodec", keepsHEVC(source) ? "hevc" : "h264"), ("audioCodec", "aac"), ("audioChannels", "2"),
             ("audioStreamIndex", audio.map { "\($0.index)" }), ("maxStreamingBitrate", bitrate == 0 ? "120000000" : "\(bitrate)"),
             ("videoBitRate", bitrate == 0 ? nil : "\(max(500_000, bitrate - 192_000))"), ("audioBitRate", "192000"),
             ("deviceId", client.identity.deviceId), ("playSessionId", "download-\(item.id)"), ("ApiKey", client.token)

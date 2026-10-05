@@ -64,7 +64,7 @@ struct DownloadButton: View {
                 if let record {
                     Button(L10n.t("download_remove"), systemImage: "trash", role: .destructive) { app.downloads.remove(record.id) }
                 } else {
-                    ForEach(DownloadManager.qualities, id: \.self) { bitrate in
+                    ForEach(DownloadManager.qualities(item), id: \.self) { bitrate in
                         Button(PlaybackPrefs.downloadLabel(bitrate)) { app.downloads.start(item, bitrate: bitrate) }
                     }
                 }

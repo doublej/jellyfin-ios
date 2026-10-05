@@ -57,6 +57,7 @@ final class DownloadManager {
         }
         try? FileManager.default.removeItem(at: record.fileURL)
         let moved = ok && (try? FileManager.default.moveItem(at: file, to: record.fileURL)) != nil
+        if moved { try? MP4.retagHEVC(at: record.fileURL) }
         record.state = moved ? .done : .failed
         record.expected = record.received
         update(record)

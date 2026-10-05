@@ -41,6 +41,12 @@ final class AVPlayerProbe: XCTestCase {
         try json.write(to: URL(filePath: "/tmp/jfios-probe.json"))
     }
 
+    /// Only the download format, as the Downloads tab writes it (HEVC retagged to hvc1).
+    func testDownloadedFilesPlay() async throws {
+        client = try await QuickConnectLogin.client()
+        for sample in try await samples() { await record(sample, "progressive file", progressive(sample)) }
+    }
+
     func record(_ sample: Sample, _ mode: String, _ outcome: Playback.Outcome) {
         let result = Result(sample: sample.key + " — " + sample.name, mode: mode, outcome: outcome)
         results.append(result)
@@ -115,7 +121,7 @@ final class AVPlayerProbe: XCTestCase {
 
     /// The Downloads tab's format: a remuxed MP4 fetched to a file, then played from disk.
     func progressive(_ sample: Sample) async -> Playback.Outcome {
-        let codec = String(sample.video.split(separator: "/").first ?? "h264")
+        let codec = sample.video.hasPrefix("hevc") ? "hevc" : "h264"
         let url = client.url("/Videos/\(sample.itemId)/stream.mp4", [
             ("mediaSourceId", sample.sourceId), ("static", "false"), ("container", "mp4"),
             ("videoCodec", codec), ("audioCodec", "aac"), ("audioStreamIndex", "\(sample.audioIndex)"),
@@ -124,6 +130,7 @@ final class AVPlayerProbe: XCTestCase {
         ])
         do {
             let file = try await Playback.fetch(url)
+            try MP4.retagHEVC(at: file)
             try? await client.stopTranscode(playSessionId: "probe-\(sample.itemId)")
             return await Playback.check(file)
         } catch {

@@ -1,6 +1,8 @@
 set shell := ["zsh", "-uo", "pipefail", "-c"]
 set unstable := true
 
+sim := env("JFIOS_SIM", "platform=iOS Simulator,name=iPhone 17")
+
 default:
     @just --list
     @echo ''
@@ -12,8 +14,13 @@ install:
     @command -v swiftlint >/dev/null 2>&1 || echo 'warn: swiftlint not installed — run: brew install swiftlint'
 
 [group('develop')]
-xcode:
-    open Package.swift
+xcode: project
+    open JellyfinUI.xcodeproj
+
+# Generate JellyfinUI.xcodeproj (gitignored) from project.yml
+[group('develop')]
+project:
+    xcodegen generate --quiet
 
 [group('quality')]
 lint:
@@ -84,6 +91,11 @@ dir-check:
 i18n-check:
     python3 .claude/scripts/check_i18n.py
 
+# Every L10n key the app uses exists in en
+[group('quality')]
+keys-check:
+    python3 scripts/check-keys.py
+
 [group('quality')]
 check:
     @echo '→ Checking Justfile format...'
@@ -94,6 +106,7 @@ check:
     just dir-check
     @echo '→ Checking translations...'
     just i18n-check
+    just keys-check
     @echo '→ Running lint...'
     just lint
     @echo '→ Running build...'
@@ -101,9 +114,29 @@ check:
     @echo '→ Running tests...'
     just test
 
+# The UI-free core (SwiftPM) and the iOS app (XcodeGen + xcodebuild)
 [group('build')]
-build:
+build: app-build
     swift build
+
+[group('build')]
+app-build: project
+    xcodebuild build -scheme JellyfinUI -destination '{{ sim }}' -derivedDataPath .build/xcode -quiet
+
+# Unit and UI tests on an iPhone simulator, against the real server; Quick Connect codes are approved by scripts/xctest.sh
+[group('quality')]
+app-test: project
+    scripts/xctest.sh test -scheme JellyfinUI -destination '{{ sim }}' -derivedDataPath .build/xcode
+
+# Measure what AVPlayer plays against the library (about 30 minutes); results land in /tmp/jfios-probe.json
+[group('quality')]
+probe: project
+    scripts/xctest.sh test -scheme Probe -destination '{{ sim }}' -derivedDataPath .build/xcode
+
+# Install a release build on the paired iPhone
+[group('build')]
+device-install: project
+    scripts/device-install.sh
 
 [group('build')]
 build-release:

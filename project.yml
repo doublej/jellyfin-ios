@@ -1,0 +1,130 @@
+# The installable app. `just project` generates JellyfinUI.xcodeproj (gitignored) from this file.
+name: JellyfinUI
+options:
+  bundleIdPrefix: dev.jurrejan
+  deploymentTarget:
+    iOS: "26.0"
+  developmentLanguage: en
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    DEVELOPMENT_TEAM: KA6433FU8U
+    CODE_SIGN_STYLE: Automatic
+    TARGETED_DEVICE_FAMILY: "1,2"
+targets:
+  JellyfinKit:
+    type: framework
+    platform: iOS
+    sources:
+      - jellyfin-ios/Kit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.jurrejan.jellyfin-ui.kit
+        GENERATE_INFOPLIST_FILE: true
+        SKIP_INSTALL: true
+
+  JellyfinUI:
+    type: application
+    platform: iOS
+    sources:
+      - jellyfin-ios/App
+    dependencies:
+      - target: JellyfinKit
+    info:
+      path: jellyfin-ios/App/Info.plist
+      properties:
+        CFBundleDisplayName: Jellyfin UI
+        CFBundleShortVersionString: "0.1.0"
+        CFBundleVersion: "1"
+        CFBundleLocalizations: [en, nl]
+        CFBundleDevelopmentRegion: en
+        LSApplicationQueriesSchemes: [http, https]
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIAppFonts: [InstrumentSans.ttf]
+        UIBackgroundModes: [audio]
+        UIApplicationSupportsIndirectInputEvents: true
+        UIUserInterfaceStyle: Dark
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        # The server is plain http on the LAN; iOS blocks that without these two.
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+          NSAllowsLocalNetworking: true
+        NSLocalNetworkUsageDescription: Jellyfin UI connects to your Jellyfin server on your home network.
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.jurrejan.jellyfin-ui
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        SWIFT_APPROACHABLE_CONCURRENCY: true
+        LOCALIZATION_PREFERS_STRING_CATALOGS: false
+
+  JellyfinKitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/JellyfinKitTests
+        excludes: [Fixtures]
+      - path: Tests/JellyfinKitTests/Fixtures
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - target: JellyfinKit
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: dev.jurrejan.jellyfin-ui.kit-tests
+
+  JellyfinUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - Tests/UITests
+    dependencies:
+      - target: JellyfinUI
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: dev.jurrejan.jellyfin-ui.ui-tests
+        TEST_TARGET_NAME: JellyfinUI
+
+  # Measures what AVPlayer really plays against the live library; run with `just probe`.
+  ProbeTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests/ProbeTests
+    dependencies:
+      - target: JellyfinUI
+      - target: JellyfinKit
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: dev.jurrejan.jellyfin-ui.probe-tests
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/JellyfinUI.app/JellyfinUI
+        BUNDLE_LOADER: $(TEST_HOST)
+
+schemes:
+  JellyfinUI:
+    build:
+      targets:
+        JellyfinUI: all
+    test:
+      targets:
+        - JellyfinKitTests
+        - JellyfinUITests
+  Probe:
+    build:
+      targets:
+        JellyfinUI: all
+    test:
+      targets:
+        - ProbeTests

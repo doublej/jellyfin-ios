@@ -1,0 +1,21 @@
+{
+  "template": "swift/ios",
+  "template_version": "3.4.0",
+  "template_source": {
+    "type": "local",
+    "path": "/Users/jurrejan/dev/_management/cookiecutter-templates",
+    "git_remote": "git@github.com:doublej/cookiecutter-templates.git",
+    "git_sha": "6c434bdb18da6f708e46eb016bfb2183238edbe1"
+  },
+  "rendered_at": "2026-10-05T16:26:44.161754+00:00",
+  "context": {
+    "project_name": "jellyfin-ios",
+    "project_slug": "jellyfin-ios",
+    "module_name": "JellyfinIos",
+    "description": "An iOS application",
+    "author": "Your Name",
+    "deployment_target": "26.0",
+    "mcp_servers": "none",
+    "mcp_scope": "project"
+  }
+}

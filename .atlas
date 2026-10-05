@@ -1,0 +1,11 @@
+{
+  "description": "An iOS application",
+  "type": "swift",
+  "framework": "swiftui",
+  "archived": false,
+  "flow": {
+    "policy": "gitflow",
+    "trunk": "main",
+    "integration": "develop"
+  }
+}

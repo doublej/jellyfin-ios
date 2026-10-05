@@ -1,0 +1,694 @@
+{
+  "Name": "Pilot",
+  "ServerId": "66b72f7e79544cb4968d1dea92e1d74b",
+  "Id": "23d1c3c9e87df352fa27a8941e638d30",
+  "Etag": "9ca9fe2ae3c08ee72e8dc941449f8eea",
+  "DateCreated": "2026-08-18T19:09:43.0000000Z",
+  "CanDelete": true,
+  "CanDownload": true,
+  "HasSubtitles": true,
+  "Container": "mkv",
+  "SortName": "001 - 0001 - Pilot",
+  "PremiereDate": "2020-08-13T22:00:00.0000000Z",
+  "ExternalUrls": [
+    {
+      "Name": "IMDb",
+      "Url": "https://www.imdb.com/title/tt10989880"
+    },
+    {
+      "Name": "TMDB",
+      "Url": "https://www.themoviedb.org/tv/97546/season/1/episode/1"
+    }
+  ],
+  "MediaSources": [
+    {
+      "Protocol": "File",
+      "Id": "23d1c3c9e87df352fa27a8941e638d30",
+      "Type": "Default",
+      "Container": "mkv",
+      "Size": 374224866,
+      "Name": "Ted.Lasso.2020.S01E01.Pilot.1080p.WebRip.x265.10Bit.AC3.5.1-JATT",
+      "IsRemote": false,
+      "ETag": "701ee66425c64a9c8027fa5d01348f97",
+      "RunTimeTicks": 18559680000,
+      "ReadAtNativeFramerate": false,
+      "IgnoreDts": false,
+      "IgnoreIndex": false,
+      "GenPtsInput": false,
+      "SupportsTranscoding": true,
+      "SupportsDirectStream": true,
+      "SupportsDirectPlay": true,
+      "IsInfiniteStream": false,
+      "UseMostCompatibleTranscodingProfile": false,
+      "RequiresOpening": false,
+      "RequiresClosing": false,
+      "RequiresLooping": false,
+      "SupportsProbing": true,
+      "VideoType": "VideoFile",
+      "MediaStreams": [
+        {
+          "Codec": "hevc",
+          "ColorSpace": "bt709",
+          "ColorTransfer": "bt709",
+          "ColorPrimaries": "bt709",
+          "TimeBase": "1/1000",
+          "VideoRange": "SDR",
+          "VideoRangeType": "SDR",
+          "AudioSpatialFormat": "None",
+          "DisplayTitle": "1080p HEVC SDR",
+          "IsInterlaced": false,
+          "IsAVC": false,
+          "BitRate": 1613066,
+          "BitDepth": 10,
+          "RefFrames": 1,
+          "IsDefault": true,
+          "IsForced": false,
+          "IsHearingImpaired": false,
+          "Height": 960,
+          "Width": 1920,
+          "AverageFrameRate": 23.976025,
+          "RealFrameRate": 23.976025,
+          "ReferenceFrameRate": 23.976025,
+          "Profile": "Main 10",
+          "Type": "Video",
+          "AspectRatio": "2:1",
+          "Index": 0,
+          "IsExternal": false,
+          "IsTextSubtitleStream": false,
+          "SupportsExternalStream": false,
+          "PixelFormat": "yuv420p10le",
+          "Level": 120,
+          "IsAnamorphic": false
+        },
+        {
+          "Codec": "ac3",
+          "Language": "eng",
+          "TimeBase": "1/1000",
+          "Title": "Jatt",
+          "VideoRange": "Unknown",
+          "VideoRangeType": "Unknown",
+          "AudioSpatialFormat": "None",
+          "LocalizedDefault": "Default",
+          "LocalizedExternal": "External",
+          "DisplayTitle": "Jatt - English - Dolby Digital - 5.1 - Default",
+          "IsInterlaced": false,
+          "IsAVC": false,
+          "ChannelLayout": "5.1",
+          "BitRate": 384000,
+          "Channels": 6,
+          "SampleRate": 48000,
+          "IsDefault": true,
+          "IsForced": false,
+          "IsHearingImpaired": false,
+          "Type": "Audio",
+          "Index": 1,
+          "IsExternal": false,
+          "IsTextSubtitleStream": false,
+          "SupportsExternalStream": false,
+          "Level": 0
+        },
+        {
+          "Codec": "subrip",
+          "Language": "eng",
+          "TimeBase": "1/1000",
+          "Title": "Jatt",
+          "VideoRange": "Unknown",
+          "VideoRangeType": "Unknown",
+          "AudioSpatialFormat": "None",
+          "LocalizedUndefined": "Undefined",
+          "LocalizedDefault": "Default",
+          "LocalizedForced": "Forced",
+          "LocalizedExternal": "External",
+          "LocalizedHearingImpaired": "Hearing Impaired",
+          "DisplayTitle": "Jatt - English - SUBRIP",
+          "IsInterlaced": false,
+          "IsAVC": false,
+          "IsDefault": false,
+          "IsForced": false,
+          "IsHearingImpaired": false,
+          "Height": 0,
+          "Width": 0,
+          "Type": "Subtitle",
+          "Index": 2,
+          "IsExternal": false,
+          "IsTextSubtitleStream": true,
+          "SupportsExternalStream": true,
+          "Level": 0
+        },
+        {
+          "Codec": "png",
+          "ColorSpace": "gbr",
+          "TimeBase": "1/90000",
+          "VideoRange": "Unknown",
+          "VideoRangeType": "Unknown",
+          "AudioSpatialFormat": "None",
+          "IsInterlaced": false,
+          "IsAVC": false,
+          "RefFrames": 1,
+          "IsDefault": false,
+          "IsForced": false,
+          "IsHearingImpaired": false,
+          "Height": 702,
+          "Width": 1380,
+          "RealFrameRate": 90000,
+          "ReferenceFrameRate": 90000,
+          "Type": "EmbeddedImage",
+          "Index": 3,
+          "IsExternal": false,
+          "IsTextSubtitleStream": false,
+          "SupportsExternalStream": false,
+          "PixelFormat": "rgba",
+          "Level": -99,
+          "IsAnamorphic": false
+        }
+      ],
+      "MediaAttachments": [
+        {
+          "Codec": "png",
+          "CodecTag": "[0][0][0][0]",
+          "Index": 3,
+          "FileName": "z A Jatt Release.png",
+          "MimeType": "image/png"
+        }
+      ],
+      "Formats": [],
+      "Bitrate": 1997066,
+      "RequiredHttpHeaders": {},
+      "TranscodingSubProtocol": "http",
+      "DefaultAudioStreamIndex": 1,
+      "DefaultSubtitleStreamIndex": -1,
+      "HasSegments": false
+    }
+  ],
+  "EnableMediaSourceDisplay": true,
+  "ChannelId": null,
+  "Overview": "American football coach Ted Lasso is hired by a wealthy divorcée to coach the English soccer team AFC Richmond.",
+  "Taglines": [],
+  "Genres": [
+    "Comedy",
+    "Drama",
+    "Sport"
+  ],
+  "CommunityRating": 7.551,
+  "RunTimeTicks": 18559680000,
+  "PlayAccess": "Full",
+  "ProductionYear": 2020,
+  "IndexNumber": 1,
+  "ParentIndexNumber": 1,
+  "RemoteTrailers": [],
+  "ProviderIds": {
+    "Imdb": "tt10989880",
+    "Tvdb": "7768683"
+  },
+  "IsHD": true,
+  "IsFolder": false,
+  "ParentId": "25b7097f401f864cd97c1bdd298aad6c",
+  "Type": "Episode",
+  "People": [
+    {
+      "Name": "Jason Sudeikis",
+      "Id": "79f05b623e6fbb749fd5f713c1fa9460",
+      "Role": "Ted Lasso",
+      "Type": "Actor",
+      "PrimaryImageTag": "4f9b8637747ef69dfa6b92176bba654c",
+      "ImageBlurHashes": {
+        "Primary": {
+          "4f9b8637747ef69dfa6b92176bba654c": "dTLNPn%gL2-;.8n$xuNH0fM{n4xax^tR?ax]kXRPxZWV"
+        }
+      }
+    },
+    {
+      "Name": "Hannah Waddingham",
+      "Id": "505ecacc5aaf7de843826d909b7eef5d",
+      "Role": "Rebecca Welton",
+      "Type": "Actor",
+      "PrimaryImageTag": "9f6ffb553258d9564f67d1b98939e15b",
+      "ImageBlurHashes": {
+        "Primary": {
+          "9f6ffb553258d9564f67d1b98939e15b": "dlJZe^s90fRkJ,NGf+bGV[ofxGoLI:oLkCbHbbaze.jt"
+        }
+      }
+    },
+    {
+      "Name": "Jeremy Swift",
+      "Id": "1065eddae8fee71e4540e631f3f3efa9",
+      "Role": "Leslie Higgins",
+      "Type": "Actor",
+      "PrimaryImageTag": "3db39fd9059944a4f1fed38cb658801b",
+      "ImageBlurHashes": {
+        "Primary": {
+          "3db39fd9059944a4f1fed38cb658801b": "dJCs1|SJ5QOU~UWBE1bY57jIruxH0gsp$kahIokBxtWB"
+        }
+      }
+    },
+    {
+      "Name": "Phil Dunster",
+      "Id": "5887e25e89e50897a4a018bdbeea73e3",
+      "Role": "Jamie Tartt",
+      "Type": "Actor",
+      "PrimaryImageTag": "49e53252a9c34fe273d65616c699d96e",
+      "ImageBlurHashes": {
+        "Primary": {
+          "49e53252a9c34fe273d65616c699d96e": "dYHoF1My5q_NE1kCn$M{I?t7%2R*T0kCozogX9ofxZay"
+        }
+      }
+    },
+    {
+      "Name": "Brett Goldstein",
+      "Id": "80211fc9e8e8394517fefa293095188e",
+      "Role": "Roy Kent",
+      "Type": "Actor",
+      "PrimaryImageTag": "367d47fc34f69db991c4d594f5222be0",
+      "ImageBlurHashes": {
+        "Primary": {
+          "367d47fc34f69db991c4d594f5222be0": "dTIE^RK,1J.T%KpKt,o~pJM{IARiI:XntSNGo}Nfxuxu"
+        }
+      }
+    },
+    {
+      "Name": "Brendan Hunt",
+      "Id": "19a5b6fcec1782a1917b83f3af9803c6",
+      "Role": "Coach Beard",
+      "Type": "Actor",
+      "PrimaryImageTag": "35c25bd9e1feca7fc9e05db8cbcb437c",
+      "ImageBlurHashes": {
+        "Primary": {
+          "35c25bd9e1feca7fc9e05db8cbcb437c": "dKIp-l%1%e~B.7soR*NaVtofRjRkxtbH%2%1o{f5t7t6"
+        }
+      }
+    },
+    {
+      "Name": "Nick Mohammed",
+      "Id": "53c58e0a37db8217d466284541e8c3f7",
+      "Role": "Nathan Shelley",
+      "Type": "Actor",
+      "PrimaryImageTag": "644efe851f80911bab77a4de0eb6c85b",
+      "ImageBlurHashes": {
+        "Primary": {
+          "644efe851f80911bab77a4de0eb6c85b": "dND9hq-pyDS$~poJt7WXNHM|V@xtbvX8oL%2%MWCjsof"
+        }
+      }
+    },
+    {
+      "Name": "Toheeb Jimoh",
+      "Id": "72e8b2e8e66cccc767b30efc65dcbcb0",
+      "Role": "Sam Obisanya",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "79479d02e051d8f8bab90c3d9f1c93e2",
+      "ImageBlurHashes": {
+        "Primary": {
+          "79479d02e051d8f8bab90c3d9f1c93e2": "dLCGDPxu?v%g~qt6%MxuR+WVRPjZx]kCs:of-;t7s:s:"
+        }
+      }
+    },
+    {
+      "Name": "Kola Bokinni",
+      "Id": "a28341714ee099cd68a6efdeaed6d8a0",
+      "Role": "Isaac McAdoo",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "81ab0c1cbd835eff0cd4d5516472fc8d",
+      "ImageBlurHashes": {
+        "Primary": {
+          "81ab0c1cbd835eff0cd4d5516472fc8d": "dFD9#OIUIU~q_3ayofxu00xuxuD%Rjxuxuj[j[j[xuof"
+        }
+      }
+    },
+    {
+      "Name": "Billy Harris",
+      "Id": "170b3abfc00f2a42c48bdd3cf88293ad",
+      "Role": "Colin Hughes",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "d4949ca3132aa618e74eb0bdee8219e0",
+      "ImageBlurHashes": {
+        "Primary": {
+          "d4949ca3132aa618e74eb0bdee8219e0": "dQC~M5Io0z-oWBR+t6xZEMxZxFI:E2s.%1R*WWs:oeRk"
+        }
+      }
+    },
+    {
+      "Name": "James Lance",
+      "Id": "fa449f7f48258adb5ffa51b87012004e",
+      "Role": "Trent Crimm",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "087eb36c53d66ef1a8331488bb69cfce",
+      "ImageBlurHashes": {
+        "Primary": {
+          "087eb36c53d66ef1a8331488bb69cfce": "dZH2G~?IcFtl?c%Mx]xu0KWVxZjZX9WAt7bH%Noft7t7"
+        }
+      }
+    },
+    {
+      "Name": "Juno Temple",
+      "Id": "f2564a3f6c46e492348f9c800eb94867",
+      "Role": "Keeley Jones",
+      "Type": "Actor",
+      "PrimaryImageTag": "61298ba9776152efa331c87ac1ceab58",
+      "ImageBlurHashes": {
+        "Primary": {
+          "61298ba9776152efa331c87ac1ceab58": "deIzI+xa0zbF9vR*NGWVR*t6%1oL9uWCxZaykCRkt6s:"
+        }
+      }
+    },
+    {
+      "Name": "Scott Van Pelt",
+      "Id": "495f7190428ed6cc7bf81f463b9c7394",
+      "Role": "Scott Van Pelt",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "845692452c0b53ca34727ebc7ff8fb15",
+      "ImageBlurHashes": {
+        "Primary": {
+          "845692452c0b53ca34727ebc7ff8fb15": "dVDItUxa0dIonNoLo~ozIpR*xas:kXkCRPaeR*WBt7of"
+        }
+      }
+    },
+    {
+      "Name": "Guy Porritt",
+      "Id": "2c6940173ef61e30d592e5cfe75f8021",
+      "Role": "Reporter 2",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "f95a439068895b5a3d295081a992531a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "f95a439068895b5a3d295081a992531a": "dkI||2-;57t7~WxuIoofXSWWRjWBS#kCoeWVS5flS2Wq"
+        }
+      }
+    },
+    {
+      "Name": "Jimmy Akingbola",
+      "Id": "37a58a0ba8d28ebab0fb6ebad8f7faf1",
+      "Role": "Ollie",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "ab621bfb1a1471b6c8438852077541cc",
+      "ImageBlurHashes": {
+        "Primary": {
+          "ab621bfb1a1471b6c8438852077541cc": "deHb[I}F+^]n[p$O$*$j$*ODJ7S2+^n%s:s:=Jw{j[so"
+        }
+      }
+    },
+    {
+      "Name": "Marcus Onilude",
+      "Id": "31abdb82c4157ebb29cfdee41c098e0b",
+      "Role": "Marcus Adebayo",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "aca05c8a9bcea7c009fc6989517721a7",
+      "ImageBlurHashes": {
+        "Primary": {
+          "aca05c8a9bcea7c009fc6989517721a7": "dNEe}k9Z0e?HIA%2WBNH%gayM{bI9YkC%MRjbcoLWARk"
+        }
+      }
+    },
+    {
+      "Name": "Bill Skinner",
+      "Id": "e04de391e26e6f9792308fc32c93a48e",
+      "Role": "Tommy",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "82dff9ffd8daf849980efc99a95f3aeb",
+      "ImageBlurHashes": {
+        "Primary": {
+          "82dff9ffd8daf849980efc99a95f3aeb": "dlGb0Nxa0LRkoaoft7WVE1WBxbj]NGWBj[f7NIj[s.ay"
+        }
+      }
+    },
+    {
+      "Name": "Bill Fellows",
+      "Id": "a963b322da86a71bc2ca82d5b45a8232",
+      "Role": "George Cartrick",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "21e62360f6b9bb3d19f7be16eb5bd8b2",
+      "ImageBlurHashes": {
+        "Primary": {
+          "21e62360f6b9bb3d19f7be16eb5bd8b2": "dOGR9%?H0ySh^*s:S2fk5lNGxGWUI:aes:R*Ioaexaof"
+        }
+      }
+    },
+    {
+      "Name": "Lloyd Griffith",
+      "Id": "c54c8fc57ff6a0ece021f228fb2d8604",
+      "Role": "Lloyd",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "6df4ef46979c013c76e93da7656e98b4",
+      "ImageBlurHashes": {
+        "Primary": {
+          "6df4ef46979c013c76e93da7656e98b4": "dRCGAKt60fNGoeWBX9t89^oz%1Rj9tRj-oxus;ofaxWA"
+        }
+      }
+    },
+    {
+      "Name": "Adam Colborne",
+      "Id": "79f5ca8b25eeff8864bbd467556e0d45",
+      "Role": "Basil 'Baz' Primrose",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "bb3f198b43c5cfaf3a1f26039c11921e",
+      "ImageBlurHashes": {
+        "Primary": {
+          "bb3f198b43c5cfaf3a1f26039c11921e": "dbIX?lRO4.oz=.t7R%oc0g%g%1xuM{WAtStQoaRj%Loy"
+        }
+      }
+    },
+    {
+      "Name": "Kevin Garry",
+      "Id": "91b68c98800a38dc3bab0e7d30686df2",
+      "Role": "Paul La Fleur",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "0530d56ce53e4c1939d684deefcb6e6b",
+      "ImageBlurHashes": {
+        "Primary": {
+          "0530d56ce53e4c1939d684deefcb6e6b": "dKF~py00u3_4DhWqS1ROJD$yR-WAEQVqVtRkMxtSo#R-"
+        }
+      }
+    },
+    {
+      "Name": "Bronson Webb",
+      "Id": "ef53123423aaa3a151823a246c3b2bdb",
+      "Role": "Jeremy Blumenthal",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "9a6efae4575f2b23d26ccc77ac99f7d7",
+      "ImageBlurHashes": {
+        "Primary": {
+          "9a6efae4575f2b23d26ccc77ac99f7d7": "dNF#,gozKP^*~qt7-=tQXns:-pIp.8oz%Mog%gt7?Ht7"
+        }
+      }
+    },
+    {
+      "Name": "Stephen Manas",
+      "Id": "71babc822f533e86195e225f1ce16d17",
+      "Role": "Richard Montlaur",
+      "Type": "GuestStar",
+      "PrimaryImageTag": "5d15bb4de35b9b4b00fc6fd3464fce6a",
+      "ImageBlurHashes": {
+        "Primary": {
+          "5d15bb4de35b9b4b00fc6fd3464fce6a": "dKJZ}G-;3Dxu9Zj[R6kC0}W;^jof9vaz?HWVbIkC?GoL"
+        }
+      }
+    },
+    {
+      "Name": "Tom Marshall",
+      "Id": "35b6636bcba04569cc397600a826e06a",
+      "Role": "Director",
+      "Type": "Director",
+      "ImageBlurHashes": {
+        "Primary": {}
+      }
+    }
+  ],
+  "Studios": [],
+  "GenreItems": [
+    {
+      "Name": "Comedy",
+      "Id": "08d31605d366d63a7a924f944b4417f1"
+    },
+    {
+      "Name": "Drama",
+      "Id": "090eac6e9de4fe1fbc194e5b96691277"
+    },
+    {
+      "Name": "Sport",
+      "Id": "38d1d324295e7b98896184f04eabec7f"
+    }
+  ],
+  "ParentLogoItemId": "9f63b15d09f76269b4c6397516545ace",
+  "ParentBackdropItemId": "9f63b15d09f76269b4c6397516545ace",
+  "ParentBackdropImageTags": [
+    "ec5f06b6a9f7f0c02c59d9b34697670e"
+  ],
+  "LocalTrailerCount": 0,
+  "UserData": {
+    "PlaybackPositionTicks": 0,
+    "PlayCount": 3,
+    "IsFavorite": false,
+    "LastPlayedDate": "2026-10-05T00:23:58.506645Z",
+    "Played": false,
+    "Key": "23d1c3c9-e87d-f352-fa27-a8941e638d30",
+    "ItemId": "23d1c3c9e87df352fa27a8941e638d30"
+  },
+  "SeriesName": "Ted Lasso",
+  "SeriesId": "9f63b15d09f76269b4c6397516545ace",
+  "SeasonId": "25b7097f401f864cd97c1bdd298aad6c",
+  "SpecialFeatureCount": 0,
+  "DisplayPreferencesId": "26dd4a82b00c839c498471cdba80a99c",
+  "Tags": [],
+  "PrimaryImageAspectRatio": 1.7777777777777777,
+  "SeriesPrimaryImageTag": "2807f145680895729b5571eb8b7dcbf4",
+  "SeasonName": "Season 1",
+  "MediaStreams": [
+    {
+      "Codec": "hevc",
+      "ColorSpace": "bt709",
+      "ColorTransfer": "bt709",
+      "ColorPrimaries": "bt709",
+      "TimeBase": "1/1000",
+      "VideoRange": "SDR",
+      "VideoRangeType": "SDR",
+      "AudioSpatialFormat": "None",
+      "DisplayTitle": "1080p HEVC SDR",
+      "IsInterlaced": false,
+      "IsAVC": false,
+      "BitRate": 1613066,
+      "BitDepth": 10,
+      "RefFrames": 1,
+      "IsDefault": true,
+      "IsForced": false,
+      "IsHearingImpaired": false,
+      "Height": 960,
+      "Width": 1920,
+      "AverageFrameRate": 23.976025,
+      "RealFrameRate": 23.976025,
+      "ReferenceFrameRate": 23.976025,
+      "Profile": "Main 10",
+      "Type": "Video",
+      "AspectRatio": "2:1",
+      "Index": 0,
+      "IsExternal": false,
+      "IsTextSubtitleStream": false,
+      "SupportsExternalStream": false,
+      "PixelFormat": "yuv420p10le",
+      "Level": 120,
+      "IsAnamorphic": false
+    },
+    {
+      "Codec": "ac3",
+      "Language": "eng",
+      "TimeBase": "1/1000",
+      "Title": "Jatt",
+      "VideoRange": "Unknown",
+      "VideoRangeType": "Unknown",
+      "AudioSpatialFormat": "None",
+      "LocalizedDefault": "Default",
+      "LocalizedExternal": "External",
+      "DisplayTitle": "Jatt - English - Dolby Digital - 5.1 - Default",
+      "IsInterlaced": false,
+      "IsAVC": false,
+      "ChannelLayout": "5.1",
+      "BitRate": 384000,
+      "Channels": 6,
+      "SampleRate": 48000,
+      "IsDefault": true,
+      "IsForced": false,
+      "IsHearingImpaired": false,
+      "Type": "Audio",
+      "Index": 1,
+      "IsExternal": false,
+      "IsTextSubtitleStream": false,
+      "SupportsExternalStream": false,
+      "Level": 0
+    },
+    {
+      "Codec": "subrip",
+      "Language": "eng",
+      "TimeBase": "1/1000",
+      "Title": "Jatt",
+      "VideoRange": "Unknown",
+      "VideoRangeType": "Unknown",
+      "AudioSpatialFormat": "None",
+      "LocalizedUndefined": "Undefined",
+      "LocalizedDefault": "Default",
+      "LocalizedForced": "Forced",
+      "LocalizedExternal": "External",
+      "LocalizedHearingImpaired": "Hearing Impaired",
+      "DisplayTitle": "Jatt - English - SUBRIP",
+      "IsInterlaced": false,
+      "IsAVC": false,
+      "IsDefault": false,
+      "IsForced": false,
+      "IsHearingImpaired": false,
+      "Height": 0,
+      "Width": 0,
+      "Type": "Subtitle",
+      "Index": 2,
+      "IsExternal": false,
+      "IsTextSubtitleStream": true,
+      "SupportsExternalStream": true,
+      "Level": 0
+    },
+    {
+      "Codec": "png",
+      "ColorSpace": "gbr",
+      "TimeBase": "1/90000",
+      "VideoRange": "Unknown",
+      "VideoRangeType": "Unknown",
+      "AudioSpatialFormat": "None",
+      "IsInterlaced": false,
+      "IsAVC": false,
+      "RefFrames": 1,
+      "IsDefault": false,
+      "IsForced": false,
+      "IsHearingImpaired": false,
+      "Height": 702,
+      "Width": 1380,
+      "RealFrameRate": 90000,
+      "ReferenceFrameRate": 90000,
+      "Type": "EmbeddedImage",
+      "Index": 3,
+      "IsExternal": false,
+      "IsTextSubtitleStream": false,
+      "SupportsExternalStream": false,
+      "PixelFormat": "rgba",
+      "Level": -99,
+      "IsAnamorphic": false
+    }
+  ],
+  "VideoType": "VideoFile",
+  "ImageTags": {
+    "Primary": "6fdb13d6be0752dcd9164dd358723234"
+  },
+  "BackdropImageTags": [],
+  "ParentLogoImageTag": "9c6002ea4c6bde2efde20f87aaaebdb0",
+  "ImageBlurHashes": {
+    "Primary": {
+      "6fdb13d6be0752dcd9164dd358723234": "WkG[TVnOV?MxR-tR~pV@IoIUkCtR%NRjRjNGkCoz%NRis.aeWVog",
+      "2807f145680895729b5571eb8b7dcbf4": "d$Ho@4XUtRxvu6NIM{bIE2V@jEjZkEoftRa}Rkj[Rja#"
+    },
+    "Logo": {
+      "9c6002ea4c6bde2efde20f87aaaebdb0": "HDP6~xRj_3_34n4nD%%Mxu-;%M~qj[M{j[-;xuj["
+    },
+    "Thumb": {
+      "d4f2ba254cb3f3d01bcc0717820e8b14": "WRHwu:Y5Sjx[E*$*}rxDkDxtaexunNv~nNVZr=aK=|xaRji{t6M{"
+    },
+    "Backdrop": {
+      "ec5f06b6a9f7f0c02c59d9b34697670e": "WjDc%L-;o{%LaKbb.TtRWEo#aes:O[bcV[R-kAs:S~kBn~f5t7WX"
+    }
+  },
+  "SeriesStudio": "Apple TV",
+  "ParentThumbItemId": "9f63b15d09f76269b4c6397516545ace",
+  "ParentThumbImageTag": "d4f2ba254cb3f3d01bcc0717820e8b14",
+  "Chapters": [],
+  "Trickplay": {
+    "23d1c3c9e87df352fa27a8941e638d30": {
+      "320": {
+        "Width": 320,
+        "Height": 160,
+        "TileWidth": 10,
+        "TileHeight": 10,
+        "ThumbnailCount": 186,
+        "Interval": 10000,
+        "Bandwidth": 7393
+      }
+    }
+  },
+  "LocationType": "FileSystem",
+  "MediaType": "Video",
+  "LockedFields": [],
+  "LockData": false,
+  "Width": 1920,
+  "Height": 960
+}

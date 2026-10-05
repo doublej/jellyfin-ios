@@ -12,3 +12,7 @@ DerivedData/
 
 .claude/claude-tree.*
 **/CLAUDE.md.history.jsonl
+
+jellyfin-ios/App/Info.plist
+*.xcresult
+__pycache__/

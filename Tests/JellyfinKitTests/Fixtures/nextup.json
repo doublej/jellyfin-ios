@@ -1,0 +1,191 @@
+{
+  "Items": [
+    {
+      "Name": "Pilot",
+      "ServerId": "66b72f7e79544cb4968d1dea92e1d74b",
+      "Id": "23d1c3c9e87df352fa27a8941e638d30",
+      "HasSubtitles": true,
+      "Container": "mkv",
+      "PremiereDate": "2020-08-13T22:00:00.0000000Z",
+      "ChannelId": null,
+      "Overview": "American football coach Ted Lasso is hired by a wealthy divorcée to coach the English soccer team AFC Richmond.",
+      "Genres": [
+        "Comedy",
+        "Drama",
+        "Sport"
+      ],
+      "CommunityRating": 7.551,
+      "RunTimeTicks": 18559680000,
+      "ProductionYear": 2020,
+      "IndexNumber": 1,
+      "ParentIndexNumber": 1,
+      "IsFolder": false,
+      "Type": "Episode",
+      "GenreItems": [
+        {
+          "Name": "Comedy",
+          "Id": "08d31605d366d63a7a924f944b4417f1"
+        },
+        {
+          "Name": "Drama",
+          "Id": "090eac6e9de4fe1fbc194e5b96691277"
+        },
+        {
+          "Name": "Sport",
+          "Id": "38d1d324295e7b98896184f04eabec7f"
+        }
+      ],
+      "ParentLogoItemId": "9f63b15d09f76269b4c6397516545ace",
+      "ParentBackdropItemId": "9f63b15d09f76269b4c6397516545ace",
+      "ParentBackdropImageTags": [
+        "ec5f06b6a9f7f0c02c59d9b34697670e"
+      ],
+      "UserData": {
+        "PlaybackPositionTicks": 0,
+        "PlayCount": 3,
+        "IsFavorite": false,
+        "LastPlayedDate": "2026-10-05T00:23:58.506645Z",
+        "Played": false,
+        "Key": "23d1c3c9-e87d-f352-fa27-a8941e638d30",
+        "ItemId": "23d1c3c9e87df352fa27a8941e638d30"
+      },
+      "SeriesName": "Ted Lasso",
+      "SeriesId": "9f63b15d09f76269b4c6397516545ace",
+      "SeasonId": "25b7097f401f864cd97c1bdd298aad6c",
+      "PrimaryImageAspectRatio": 1.7777777777777777,
+      "SeriesPrimaryImageTag": "2807f145680895729b5571eb8b7dcbf4",
+      "SeasonName": "Season 1",
+      "VideoType": "VideoFile",
+      "ImageTags": {
+        "Primary": "6fdb13d6be0752dcd9164dd358723234"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "9c6002ea4c6bde2efde20f87aaaebdb0",
+      "ImageBlurHashes": {
+        "Primary": {
+          "6fdb13d6be0752dcd9164dd358723234": "WkG[TVnOV?MxR-tR~pV@IoIUkCtR%NRjRjNGkCoz%NRis.aeWVog",
+          "2807f145680895729b5571eb8b7dcbf4": "d$Ho@4XUtRxvu6NIM{bIE2V@jEjZkEoftRa}Rkj[Rja#"
+        },
+        "Logo": {
+          "9c6002ea4c6bde2efde20f87aaaebdb0": "HDP6~xRj_3_34n4nD%%Mxu-;%M~qj[M{j[-;xuj["
+        },
+        "Thumb": {
+          "d4f2ba254cb3f3d01bcc0717820e8b14": "WRHwu:Y5Sjx[E*$*}rxDkDxtaexunNv~nNVZr=aK=|xaRji{t6M{"
+        },
+        "Backdrop": {
+          "ec5f06b6a9f7f0c02c59d9b34697670e": "WjDc%L-;o{%LaKbb.TtRWEo#aes:O[bcV[R-kAs:S~kBn~f5t7WX"
+        }
+      },
+      "ParentThumbItemId": "9f63b15d09f76269b4c6397516545ace",
+      "ParentThumbImageTag": "d4f2ba254cb3f3d01bcc0717820e8b14",
+      "LocationType": "FileSystem",
+      "MediaType": "Video"
+    },
+    {
+      "Name": "Sean.Combs.The.Reckoning.S01E01.Pain.vs.Love",
+      "ServerId": "66b72f7e79544cb4968d1dea92e1d74b",
+      "Id": "10c994337b3c060c6e7362688c879a1b",
+      "HasSubtitles": true,
+      "Container": "mkv",
+      "PremiereDate": "2025-12-02T12:51:06.0000000Z",
+      "ChannelId": null,
+      "Genres": [],
+      "RunTimeTicks": 37121920000,
+      "ProductionYear": 2025,
+      "IndexNumber": 1,
+      "ParentIndexNumber": 1,
+      "IsFolder": false,
+      "Type": "Episode",
+      "GenreItems": [],
+      "UserData": {
+        "PlaybackPositionTicks": 0,
+        "PlayCount": 0,
+        "IsFavorite": false,
+        "Played": false,
+        "Key": "0230a329-44f4-8f2f-924d-fc873e6c3d06001001",
+        "ItemId": "10c994337b3c060c6e7362688c879a1b"
+      },
+      "SeriesName": "Sean Combs The Reckoning S01 1080p NF WEB-DL DDP5 1 Atmos.H",
+      "SeriesId": "0230a32944f48f2f924dfc873e6c3d06",
+      "SeasonId": "985da4559f17ce1aab61d3952e3cb3a7",
+      "PrimaryImageAspectRatio": 1.7777777777777777,
+      "SeasonName": "Season 1",
+      "VideoType": "VideoFile",
+      "ImageTags": {
+        "Primary": "ae7f4f2b49c02fc4c626bbb734145d0d"
+      },
+      "BackdropImageTags": [],
+      "ImageBlurHashes": {
+        "Primary": {
+          "ae7f4f2b49c02fc4c626bbb734145d0d": "W96t].*JG[7}LL?bQ-VEm+rDm,Vs57Mxv~+^v~EL%gl8X-TcTco}"
+        }
+      },
+      "LocationType": "FileSystem",
+      "MediaType": "Video"
+    },
+    {
+      "Name": "Formula.1.Drive.to.Survive.S08E01",
+      "ServerId": "66b72f7e79544cb4968d1dea92e1d74b",
+      "Id": "7cd4241e620fd06e012f431f81d035ba",
+      "HasSubtitles": true,
+      "Container": "mkv",
+      "PremiereDate": "2026-02-28T14:43:33.0000000Z",
+      "ChannelId": null,
+      "Genres": [],
+      "RunTimeTicks": 31357760000,
+      "ProductionYear": 2026,
+      "IndexNumber": 1,
+      "ParentIndexNumber": 8,
+      "IsFolder": false,
+      "Type": "Episode",
+      "GenreItems": [],
+      "ParentLogoItemId": "5647eecd2ea2a6209d322d3ed9e9c28d",
+      "ParentBackdropItemId": "5647eecd2ea2a6209d322d3ed9e9c28d",
+      "ParentBackdropImageTags": [
+        "c29f07afb1780b59109860e42376a59f"
+      ],
+      "UserData": {
+        "PlaybackPositionTicks": 0,
+        "PlayCount": 1,
+        "IsFavorite": false,
+        "LastPlayedDate": "2026-08-18T21:38:29.817561Z",
+        "Played": false,
+        "Key": "7cd4241e-620f-d06e-012f-431f81d035ba",
+        "ItemId": "7cd4241e620fd06e012f431f81d035ba"
+      },
+      "SeriesName": "Formula 1: Drive to Survive",
+      "SeriesId": "5647eecd2ea2a6209d322d3ed9e9c28d",
+      "SeasonId": "5ecaa9a48492dd32a27e1ce2c1d289b9",
+      "PrimaryImageAspectRatio": 1.7777777777777777,
+      "SeriesPrimaryImageTag": "926e51cb6b5b540d86590a97dc8e717b",
+      "SeasonName": "Season 8",
+      "VideoType": "VideoFile",
+      "ImageTags": {
+        "Primary": "6fcf80f53abda1689e0745dc7b8919a0"
+      },
+      "BackdropImageTags": [],
+      "ParentLogoImageTag": "20f01edad0d5fa9aaac73632b49857b6",
+      "ImageBlurHashes": {
+        "Primary": {
+          "6fcf80f53abda1689e0745dc7b8919a0": "WFA,tV?bs=kC0KIp_3%MsWWUE1M|bct7RjM{MxM{-;tQg3M|D$NE",
+          "926e51cb6b5b540d86590a97dc8e717b": "dmE{qtoOR*bc.AWFW=f,X=WFWCbcKma$RkR-9#WCWEf+"
+        },
+        "Logo": {
+          "20f01edad0d5fa9aaac73632b49857b6": "PNI#x_-;t7t7xuofxut7~q%MM{Rjj[t7t7t7_3%Mofayxuayt7j["
+        },
+        "Thumb": {
+          "3ffd4201aa17baabcd7a1a0d6777be8e": "W+GuzbRpjbtSS5t7?wRpn%kXW=ofF#WFV@NKjbayK7jvRkRmn%j["
+        },
+        "Backdrop": {
+          "c29f07afb1780b59109860e42376a59f": "W@HV9*o#tQt7s,xt.AWFoykCoIt7ALRkRkWXaxS5J;WCRja#bHR-"
+        }
+      },
+      "ParentThumbItemId": "5647eecd2ea2a6209d322d3ed9e9c28d",
+      "ParentThumbImageTag": "3ffd4201aa17baabcd7a1a0d6777be8e",
+      "LocationType": "FileSystem",
+      "MediaType": "Video"
+    }
+  ],
+  "TotalRecordCount": 3,
+  "StartIndex": 0
+}

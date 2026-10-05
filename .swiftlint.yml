@@ -6,6 +6,22 @@ function_body_length:
   warning: 20
   error: 40
 
+# Short names that are the domain's own: coordinates, the server's field names (Pw, Id), quality labels.
+identifier_name:
+  excluded: [x, y, id, ok, sd, hd, pw, on]
+
+# A key map is one flat switch; its cases are not branches worth splitting.
+cyclomatic_complexity:
+  ignores_case_statements: true
+
+# Settings enums nest inside the struct they configure.
+nesting:
+  type_level: 2
+
+# `UI` is the UI-test helper namespace.
+type_name:
+  excluded: [UI]
+
 file_length:
   warning: 300
   error: 400

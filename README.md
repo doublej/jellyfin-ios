@@ -1,34 +1,22 @@
 # jellyfin-ios
 
-An iOS application
-
-Author: Your Name
+Jellyfin UI for iPhone and iPad: a native SwiftUI client for the home Jellyfin server, matching the web
+client `jellyfin-ui` and adding AVPlayer playback, Picture in Picture, AirPlay, lock-screen controls and downloads.
 
 ## Requirements
 
-- Swift 5.9+
-- iOS 26.0+
-- Xcode 15+
+- Xcode 26, iOS 26 simulator or device
+- `xcodegen`, `swiftlint`, `just`
+- `onenv` with the `jellyfin` item, for tests and scripts
 
-## Getting Started
+## Getting started
 
 ```bash
-swift build
-open Package.swift  # Opens in Xcode
+just project        # generate JellyfinUI.xcodeproj from project.yml
+just xcode          # open it
+just check          # everything except the simulator tests
+just app-test       # unit + UI tests on an iPhone simulator, against the real server
+just device-install # Release build on the paired iPhone
 ```
 
-## Common Commands
-
-| Command | Description |
-|---------|-------------|
-| `swift build` | Build the project |
-| `swift test` | Run tests |
-| `open Package.swift` | Open in Xcode |
-
-## Project Structure
-
-```
-jellyfin-ios/
-  main.swift     # SwiftUI app entry point
-Package.swift    # SPM manifest
-```
+See `CLAUDE.md` for the layout, `TASKS.md` for the v1 checklist and `docs/GAPS.md` for what the server can't do.

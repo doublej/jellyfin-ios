@@ -39,6 +39,7 @@ struct DownloadRow: View {
             }
         }
         .accessibilityIdentifier("download.\(record.id)")
+        .accessibilityValue(record.state.rawValue)
     }
 
     @ViewBuilder private var status: some View {

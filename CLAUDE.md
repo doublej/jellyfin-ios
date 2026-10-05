@@ -1,63 +1,57 @@
 # jellyfin-ios
 
-> An iOS application
+> Native iOS/iPadOS client for JJ's Jellyfin server (Jellyfin UI on the home screen): parity with the
+> web client `$HOME/dev/web/jellyfin-ui`, plus AVPlayer, PiP, AirPlay, lock-screen controls and downloads.
 
 ## What this is
 
-An iOS SwiftUI application built with SwiftPM. Deployment target: `26.0`. SwiftLint is the lint bar; tests are SwiftPM-driven.
+A SwiftUI app for iOS 26 (iPhone + iPad), Swift 6 strict concurrency. Two halves:
+
+```
+jellyfin-ios/Kit/      JellyfinKit: UI-free SwiftPM library (API, models, profile, player rules). swift test on macOS.
+jellyfin-ios/App/      The app, built by XcodeGen (project.yml → JellyfinUI.xcodeproj, gitignored). MainActor by default.
+Tests/JellyfinKitTests Unit tests: decoding, device profile, resume, player rules, MP4 fix-ups.
+Tests/UITests          XCUITests: sign-in, Home → play → resume, toggles, screen tour (screenshots to /tmp/jfios-shots/).
+Tests/ProbeTests       What AVPlayer really plays against the live library (`just probe`, ~30 min).
+scripts/               jf.sh (one API call as admin), xctest.sh (approves Quick Connect), watch-state.sh, device-install.sh.
+docs/                  GAPS.md (server limits), PROFILE.md (probe results → device profile).
+```
 
 ## Mental model
 
-```
-jellyfin-ios/
-├── ...             # SwiftUI app source (views, models, services)
-├── L10n.swift      # language bundle for String(localized:bundle:)
-└── Resources/      # en.lproj (base) + nl.lproj Localizable.strings
-Package.swift       # SwiftPM manifest — executable target + tests
-Justfile            # task runner
-.swiftlint.yml      # strict ruleset
-```
-
-The runtime path is `App entry (`@main struct ... : App`) → root `Scene` → `View` hierarchy`. New surfaces are SwiftUI `View` types composed from the root scene; persistence / network work belongs in `@Observable` services owned at the app or scene level.
+`JellyfinApp` → `RootView` (sign-in or `MainTabs`) → a `NavigationStack` per tab with `routeDestinations()`.
+`AppModel` (environment) owns the session, API client, `UserDataStore` (watched/favourite shared by every view),
+`DownloadManager` and `PlaybackPrefs`. Playing anything sets `app.playing`; `RootView` shows `PlayerView` full screen.
+`PlayerController` negotiates (`Negotiator`, PlaybackInfo with `DeviceProfile.build(.avPlayer)`), attaches the stream,
+switches tracks/quality at the same position, falls back from direct play to HLS, and reports progress.
+Ported rules from the web client live in Kit with the web file named in the doc comment.
 
 ## Invariants
 
-- SwiftPM is the build system — no Xcode project files committed. `just xcode` opens the package in Xcode for editing.
-- SwiftUI for the UI layer (UIKit only where SwiftUI cannot reach).
-- `async` / `await` for concurrency; avoid completion handlers and explicit `DispatchQueue` work in new code.
-- SwiftLint `--strict` must pass — no warnings.
-- User-facing text is multilingual: `en` (base, fallback) and `nl` (informal je/jij). Never hardcode user-visible strings; add each key to every language file in the same change. Logs and developer errors stay English.
-- Functions stay small (5–10 lines target, 20 max).
-- Errors surface at the boundary; throw, propagate with `try`, handle at the SwiftUI layer.
+- Credentials only through `onenv export jellyfin -- <command>` (scripts do this). Never in files, logs or the repo.
+- Watch state changed by tests is JJ's: `scripts/watch-state.sh snapshot` before, `restore` after (`diff` must print nothing).
+- Quick Connect in the simulator is approved by `scripts/xctest.sh`; no password is ever typed into the UI.
+- Jellyfin JSON is PascalCase (`JSONCoding` flips the first letter); local persistence uses plain JSON coders.
+- User-facing text: `L10n.t("key")` / `L10n.f("key", args)` with keys in `jellyfin-ios/App/Resources/{en,nl}.lproj`.
+  Wording follows the web client's `messages/` (`scripts/import-web-strings.py`). nl is informal (je/jij).
+- New source files need `just project` (xcodegen) before xcodebuild sees them.
+- SwiftLint `--strict`; files ≤ 300 lines, ≤ 6 files per folder (`.quality.json`).
 
 ## Common change patterns
 
-- **Add or change text** → edit `jellyfin-ios/Resources/*.lproj/Localizable.strings`, call `String(localized: "key", bundle: L10n.bundle)` (never `bundle: .module`: a bare SwiftPM executable ignores the user's language there), run `just i18n-check`.
-- **Add a language** → add `jellyfin-ios/Resources/<locale>.lproj/Localizable.strings` (SwiftPM picks it up, nothing to register), run `just i18n-check`.
-- **Add a view** → new `struct ...: View` in a dedicated file.
-- **Add a model** → `struct` (value-typed) or `@Observable` class for state that survives across views.
-- **Add a service** → class with `async` methods, injected via environment or initializer.
-- **Add a dependency** → declare in `Package.swift` `dependencies:` and the executable target's `dependencies:`.
+- **Add text** → both `.strings` files, then `just i18n-check keys-check`.
+- **Add an API call** → `Kit/API/<area>.swift` extension on `APIClient`, decoded with `JSONCoding.decoder`.
+- **Change what AVPlayer is offered** → `Kit/Profile/Capabilities.swift`, re-run `just probe`, update docs/PROFILE.md.
+- **Add a screen** → a `View` in the matching `App/<area>/` folder; route via `Route` in `Shell/Routes.swift`.
+- **Server can't do it** → note it in docs/GAPS.md with the reason and build the closest thing it allows.
 
 ## Verification
 
-Run `just check` after every change. It composes:
-
-`just-fmt-check` + `loc-check` + `dir-check` + `i18n-check` + `lint` + `build` + `test`
-
-Recipe reference:
-
-- `just install` — resolve SwiftPM dependencies (warns if SwiftLint missing)
-- `just lint` — `swiftlint --strict`
-- `just lint-fix` — `swiftlint --fix` then relint
-- `just build` / `just build-release` — debug / release build
-- `just test` — SwiftPM test
-- `just xcode` — open in Xcode (required for running on a simulator / device)
-- `just loc-check` / `just dir-check` — file-size and per-directory thresholds from `.quality.json`
-- `just i18n-check` — every language file has the base's keys and placeholders
-- `just just-fmt-check` — verify Justfile formatting
-- `just clean` — remove `.build/` artifacts
-- `just update-scaffold` — pull updates from the cookiecutter template
+`just check` = fmt + loc + dir + i18n + keys + lint + build (app + Kit) + Kit tests.
+`just app-test` runs the unit and UI tests on an iPhone simulator against the real server (`JFIOS_SIM` overrides the destination).
+`just device-install` builds Release and installs on the paired iPhone (it must be unlocked).
+Timings: the app logs `JFIOS-TIMING <event> <ms>` (category `timing`); stream them with
+`xcrun simctl spawn booted log stream --predicate 'eventMessage CONTAINS "JFIOS-TIMING"'`.
 
 ## Related context
 
@@ -65,7 +59,8 @@ Recipe reference:
 - `.claude/` — Claude Code settings, scaffold-update hook, library-freshness hook, diagnostic logging
 - `.quality.json` — loc / dir thresholds (single source of truth)
 - `.swiftlint.yml` — strict lint ruleset
-- As this project grows, add nested `CLAUDE.md` files in high-value subfolders (Views, Services, Models, integrations) following the `claude-md-tree` skill's context-packet pattern.
+- `TASKS.md` — the v1 checklist; `docs/GAPS.md`, `docs/PROFILE.md`
+- `$HOME/dev/web/jellyfin-ui` — the web client this app matches (TASKS.md, docs/DESIGN.md, `src/lib/player/rules/`)
 
 <!-- agent-log:policy -->
 ### Shared agent journal

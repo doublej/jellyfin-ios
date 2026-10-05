@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*
+  The projection room (jellyfin-ui docs/DESIGN.md): neutral, flat, dark. Artwork is
+  the only colour; the one interface accent is white; red is for errors only.
+  Token names follow the deploy-github-pages scaffold so its components still fit.
+*/
+:root {
+  color-scheme: dark;
+
+  --paper: #0d0d0f;
+  --paper-tint: #16161a;
+  --surface-2: #1f1f24;
+  --rule: #2b2b31;
+  --ink: #f1f1ef;
+  --ink-soft: #a2a2a8;
+  --ink-faint: #6c6c73;
+  --plate: #f1f1ef;
+  --danger: #e5484d;
+
+  /* Average colour of the hero artwork, darkened: the glow behind the hero */
+  --glow: #4a2f2b;
+
+  --term-bg: #16161a;
+  --term-bar: #1f1f24;
+  --term-text: #f1f1ef;
+  --term-dim: #a2a2a8;
+
+  --font-text: 'Instrument Sans Variable', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --radius: 6px;
+  --ease: 140ms ease-out;
+  --section-padding: clamp(56px, 9vw, 112px);
+  --container-max-width: 1200px;
+  --container-padding: clamp(16px, 4vw, 48px);
+  --grid-gap: clamp(24px, 4vw, 56px);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  font-family: var(--font-text);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+h1, h2, h3 {
+  font-weight: 680;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--ink-faint);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--ease);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Buttons: white primary with near-black text, solid raised secondary. No pills. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--surface-2);
+  color: var(--ink);
+  transition: background var(--ease), color var(--ease);
+}
+
+.btn:hover { background: var(--rule); }
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn.primary:hover { background: #ffffff; }
+
+/* Terminal output. Default text needs no class. */
+.t-prompt { color: var(--ink-faint); margin-right: 0.75em; user-select: none; }
+.t-prompt::before { content: '$'; }
+.t-hi { color: #ffffff; font-weight: 600; }
+.t-dim { color: var(--term-dim); }
+.t-ok { color: var(--ink); }
+.t-err { color: var(--danger); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

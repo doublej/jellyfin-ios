@@ -1,6 +1,6 @@
 import XCTest
 
-/// Downloads an Everwood episode at 1.5 Mbps, follows the progress, plays the file and jumps to 50%.
+/// Downloads an Everwood episode at the lowest quality (1.5 Mbps), follows the progress, plays the file and jumps to 50%.
 /// A downloaded file keeps its position on the device and sends it to the server afterwards: check with
 /// `scripts/watch-state.sh diff`, then `restore`. Takes as long as the server's conversion (about 10 minutes).
 final class DownloadTests: XCTestCase {
@@ -9,8 +9,7 @@ final class DownloadTests: XCTestCase {
         let app = UI.launch()
         UI.signIn(app)
         openEpisode(app)
-        app.buttons["detail.download"].tap()
-        app.buttons["1.5 Mbps"].tap()
+        downloadLowestQuality(app)
 
         UI.tab(app, "Downloads")
         let row = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'download.'")).firstMatch
@@ -27,6 +26,15 @@ final class DownloadTests: XCTestCase {
         sleep(4)
         if !app.buttons["player.close"].isHittable { app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.3)).tap() }
         app.buttons["player.close"].tap()
+    }
+
+    /// The download menu lists qualities from original down; the last is the lowest, 1.5 Mbps.
+    @MainActor
+    private func downloadLowestQuality(_ app: XCUIApplication) {
+        app.buttons["detail.download"].tap()
+        let qualities = app.buttons.matching(NSPredicate(format: "label CONTAINS 'Mbps'"))
+        XCTAssertTrue(qualities.firstMatch.waitForExistence(timeout: 5), "quality menu: \(app.buttons.allElementsBoundByIndex.map(\.label))")
+        qualities.allElementsBoundByIndex.last?.tap()
     }
 
     /// Search → the series → the first episode's page.

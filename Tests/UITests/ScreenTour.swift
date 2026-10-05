@@ -15,10 +15,10 @@ final class ScreenTour: XCTestCase {
         film(app)
         library(app)
         series(app)
-        search(app)
         UI.tab(app, "Downloads")
         UI.shot("61-downloads", self)
         settings(app)
+        search(app)  // last: on iPhone the tab bar stays hidden while searching
     }
 
     /// Types a query, then closes the search so the tab bar comes back.
@@ -26,6 +26,8 @@ final class ScreenTour: XCTestCase {
     private func search(_ app: XCUIApplication) {
         UI.tab(app, "Search")
         let field = app.searchFields.firstMatch
+        // iPad folds the field into a magnifier button at the top right.
+        if !field.waitForExistence(timeout: 5) { app.buttons.matching(NSPredicate(format: "label == 'Search'")).allElementsBoundByIndex.last?.tap() }
         guard field.waitForExistence(timeout: 10) else { return UI.shot("60-search-no-field", self) }
         field.tap()
         field.typeText("the")
@@ -105,6 +107,7 @@ final class ScreenTour: XCTestCase {
         app.buttons["More"].firstMatch.tap()
         let item = app.descendants(matching: .any).matching(NSPredicate(format: "label IN %@", labels)).firstMatch
         if item.waitForExistence(timeout: 5) { return item }
+        UI.shot("4x-overflow-\(id)", self)
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.9)).tap()
         return nil
     }

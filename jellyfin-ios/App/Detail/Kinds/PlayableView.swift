@@ -46,6 +46,7 @@ struct PlayableView: View {
                 NavigationLink(value: Route.item(Item(id: seasonId, name: item.seasonName, type: "Season"))) {
                     Text(L10n.f("season_link", item.seasonName ?? ""))
                 }
+                .accessibilityIdentifier("episode.season")
             }
         }
         .font(Theme.meta.weight(.semibold)).foregroundStyle(Theme.text2)

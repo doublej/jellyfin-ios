@@ -1,8 +1,8 @@
 import JellyfinKit
 import SwiftUI
 
-/// Signed in: Home, the libraries, Downloads, Settings and Search. Phones get a tab bar; iPads
-/// a sidebar they can collapse.
+/// Signed in: Home, the libraries, Downloads, Settings and Search. Phones get a tab bar (Settings
+/// sits behind Home's gear, so nothing spills into More); iPads a sidebar they can collapse.
 struct MainTabs: View {
     @Environment(AppModel.self) private var app
     @Environment(\.horizontalSizeClass) private var sizeClass
@@ -20,9 +20,10 @@ struct MainTabs: View {
                 }
             }
             Tab(L10n.t("nav_downloads"), systemImage: "arrow.down.circle") { stack { DownloadsView() } }
-            Tab(L10n.t("nav_settings"), systemImage: "gearshape") { stack { SettingsView() } }
-                .defaultVisibility(.hidden, for: .tabBar)
-            Tab(role: .search) { stack { SearchView() } }
+            if sizeClass != .compact {
+                Tab(L10n.t("nav_settings"), systemImage: "gearshape") { stack { SettingsView() } }
+            }
+            Tab(L10n.t("nav_search"), systemImage: "magnifyingglass", role: .search) { stack { SearchView() } }
         }
         .tabViewStyle(.sidebarAdaptable)
         .environment(\.cardSize, CardSize.of(sizeClass))

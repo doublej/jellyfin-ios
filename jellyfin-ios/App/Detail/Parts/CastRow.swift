@@ -13,6 +13,7 @@ struct CastRow: View {
                     LazyHStack(alignment: .top, spacing: 14) {
                         ForEach(people.prefix(30), id: \.self) { person in
                             NavigationLink(value: Route.item(person.asItem)) { tile(person) }.buttonStyle(CardButtonStyle())
+                                .accessibilityIdentifier("person.\(person.id)")
                         }
                     }
                 }

@@ -18,7 +18,7 @@ struct SeekBar: View {
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
             .frame(height: 0)
-            Slider(value: $value, in: 0...max(1, controller.duration)) { editing in
+            Slider(value: seekValue, in: 0...max(1, controller.duration)) { editing in
                 scrubbing = editing
                 if !editing { controller.seek(to: value) }
             }
@@ -29,6 +29,14 @@ struct SeekBar: View {
             times
         }
         .onChange(of: controller.time) { _, time in if !scrubbing { value = time } }
+    }
+
+    /// A drag seeks when it ends; VoiceOver's adjust (no drag) seeks straight away.
+    private var seekValue: Binding<Double> {
+        Binding(get: { value }, set: { newValue in
+            value = newValue
+            if !scrubbing { controller.seek(to: newValue) }
+        })
     }
 
     private var times: some View {

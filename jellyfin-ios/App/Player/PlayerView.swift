@@ -56,7 +56,7 @@ struct PlayerView: View {
     }
 
     private func stop() {
-        controller?.finish()
+        app.stopReport = controller?.finish()
         nowPlaying.detach()
         app.downloads.syncProgress()
     }

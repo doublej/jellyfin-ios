@@ -24,7 +24,9 @@ struct HomeView: View {
             if let userId = app.session?.userId { model.showCached(userId: userId) }
             await reload()
         }
-        .onChange(of: app.playing) { old, new in if old != nil, new == nil { Task { await reload() } } }
+        .onChange(of: app.playing) { old, new in
+            if old != nil, new == nil { Task { await app.stopReport?.value; await reload() } }
+        }
         .toolbar {
             if sizeClass == .compact {
                 ToolbarItem(placement: .topBarTrailing) {

@@ -35,6 +35,7 @@ final class PlayerController {
     private var fellBack = false
     var stopped = false
     private var observations: [NSKeyValueObservation] = []
+    private var playingObservation: NSKeyValueObservation?
     private var timeToken: Any?
     var reportTask: Task<Void, Never>?
     private var subtitleRequest = 0
@@ -106,6 +107,32 @@ final class PlayerController {
         }]
         NotificationCenter.default.addObserver(self, selector: #selector(ended), name: AVPlayerItem.didPlayToEndTimeNotification, object: item)
         player.replaceCurrentItem(with: item)
+        watchForStall(item)
+    }
+
+    /// A direct file AVPlayer never gets ready for (seen in the simulator) fails no faster than never,
+    /// so after a while it counts as failed and falls back to HLS like an error would.
+    private func watchForStall(_ item: AVPlayerItem) {
+        guard stream?.method == .directPlay, download == nil else { return }
+        Task {
+            try? await Task.sleep(for: .seconds(Self.directStallSeconds))
+            guard item == player.currentItem, loading else { return }
+            fail(.stream)
+        }
+    }
+
+    static let directStallSeconds = 6.0
+
+    /// Ready but not playing ten seconds later: logs why, for the timing log.
+    private func reportIfStuck(_ item: AVPlayerItem) {
+        Task {
+            try? await Task.sleep(for: .seconds(10))
+            guard item == player.currentItem, !startedOnce else { return }
+            let buffered = item.loadedTimeRanges.map { "\($0.timeRangeValue.start.seconds)+\($0.timeRangeValue.duration.seconds)" }
+            let errors = item.errorLog()?.events.suffix(3).map { "\($0.errorStatusCode) \($0.errorComment ?? "")" } ?? []
+            Timing.span("play-stuck", from: requestedAt, "status=\(player.timeControlStatus.rawValue) waiting=\(player.reasonForWaitingToPlay?.rawValue ?? "-") "
+                + "rate=\(player.rate) time=\(item.currentTime().seconds) keepUp=\(item.isPlaybackLikelyToKeepUp) buffered=\(buffered) errors=\(errors)")
+        }
     }
 
     private func statusChanged(_ item: AVPlayerItem, start: Double) {
@@ -115,6 +142,7 @@ final class PlayerController {
             Timing.span("play-ready", from: requestedAt)
             loading = false
             seek(to: start, play: true)
+            reportIfStuck(item)
         case .failed:
             fail(PlaybackFailure.from(item.error ?? PlaybackFailure.stream))
         default:
@@ -130,6 +158,7 @@ final class PlayerController {
     private func fail(_ kind: PlaybackFailure) {
         if !fellBack, stream?.method == .directPlay, download == nil {
             fellBack = true
+            Timing.span("play-fallback", from: requestedAt, kind.rawValue)
             failureNotice = L10n.t("player_fell_back")
             Task { await load(at: player.currentTime().seconds.finiteOrZero, allowDirect: false) }
             return
@@ -157,9 +186,9 @@ final class PlayerController {
         timeToken = player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 4), queue: .main) { [weak self] time in
             MainActor.assumeIsolated { self?.tick(time.seconds) }
         }
-        observations.append(player.observe(\.timeControlStatus) { [weak self] player, _ in
+        playingObservation = player.observe(\.timeControlStatus) { [weak self] player, _ in
             Task { @MainActor in self?.playingChanged(player.timeControlStatus == .playing) }
-        })
+        }
     }
 
     private func tick(_ seconds: Double) {

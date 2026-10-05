@@ -70,19 +70,20 @@ extension PlayerController {
     }
 
     /// Reports the final position once; the server turns it into a resume point or "watched".
-    func finish() {
-        guard !stopped else { return }
+    /// The returned task ends when the server has it, so pages can reload after that.
+    @discardableResult
+    func finish() -> Task<Void, Never>? {
+        guard !stopped else { return nil }
         stopped = true
         reportTask?.cancel()
         saveOfflineProgress()
-        if download == nil, failure == nil, let client, let state = state() {
-            let stream = self.stream
-            Task {
-                try? await client.reportStopped(state)
-                if stream?.method == .transcode { try? await client.stopTranscode(playSessionId: stream?.playSessionId ?? "") }
-            }
-        }
         player.pause()
+        guard download == nil, failure == nil, let client, let state = state() else { return nil }
+        let stream = self.stream
+        return Task {
+            try? await client.reportStopped(state)
+            if stream?.method == .transcode { try? await client.stopTranscode(playSessionId: stream?.playSessionId ?? "") }
+        }
     }
 
     /// A downloaded copy keeps its position locally until the server can be told.

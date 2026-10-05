@@ -12,6 +12,8 @@ final class AppModel {
     private(set) var isOnline = true
     /// What the full-screen player shows; nil when it is closed.
     var playing: PlayRequest?
+    /// The last player's stop report; pages reload after it lands so they show the new resume point.
+    var stopReport: Task<Void, Never>?
     private var token: String?
     private let monitor = NWPathMonitor()
 

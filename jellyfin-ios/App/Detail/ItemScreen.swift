@@ -21,7 +21,9 @@ struct ItemScreen: View {
         .background(Theme.base)
         .navigationBarTitleDisplayMode(.inline)
         .task { await load() }
-        .onChange(of: app.playing) { old, new in if old != nil, new == nil { Task { await load() } } }
+        .onChange(of: app.playing) { old, new in
+            if old != nil, new == nil { Task { await app.stopReport?.value; await load() } }
+        }
     }
 
     @ViewBuilder private func content(_ item: Item) -> some View {
